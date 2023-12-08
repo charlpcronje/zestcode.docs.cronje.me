@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>formattedDoc.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="chat-function-requirements">Chat Function Requirements</h1>
+<ol>
+<li>
+<p><strong>Upload Element</strong>: Need to have an upload element for:</p>
+<ul>
+<li>Upload profile of the target client (LinkedIn profile).</li>
+<li>Upload LinkedIn page of the company or website URL or Crunchbase (created company profile) scans career page or jobs page on LinkedIn profile.</li>
+</ul>
+</li>
+<li>
+<p><strong>Chat Functionality</strong>: Create a chat function where the user can play the role of the CEO and provide feedback as harsh as they like.</p>
+</li>
+<li>
+<p><strong>Simulation of Close Scenario</strong>: Implement a mechanism to simulate a close scenario effectively.</p>
+</li>
+<li>
+<p><strong>CEO Persona</strong>: Optimize the CEO persona to be less 'chatty' for a more professional interaction.</p>
+</li>
+<li>
+<p><strong>Feedback Summary</strong>: Provide a feedback summary at the end of the chat that includes information not gathered which was available during the conversation.</p>
+</li>
+<li>
+<p><strong>Closed vs Open Questions</strong>: Include a summary/suggestions section that distinguishes between closed and open questions used during the conversation.</p>
+</li>
+<li>
+<p><strong>Transcript</strong>: Generate and display a transcript of the entire chat for reference.</p>
+</li>
+</ol>
+<h3 id="the-transcript-can-be-found-here-together-with-some-insights">The transcript can be found here, together with some insights</h3>
+<ul>
+<li><a href="./formattedDialogue.md">Transcript</a></li>
+</ul>
+<hr>
+<h3 id="section-2">SECTION 2</h3>
+<hr>
+<h1 id="rekbot-landing-page">RekBot Landing Page</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Let's get the landing page built, use an AI Avatar to promote the service and test the demand, make it available in as many languages as possible and test demographics.</p>
+<p><strong>Introducing RekBot: Your Future-Ready Recruitment Companion!</strong> 🚀</p>
+<p>Step into a new era of recruitment excellence with RekBot – the AI-powered partner that seamlessly blends timeless expertise with cutting-edge technology. Whether you're a newcomer eager to thrive, a seasoned pro seeking to soar higher, a leader aiming to inspire, or a visionary business owner with growth ambitions, RekBot is here to transform your journey. Experience personalized training, real-time insights, and strategies that align with the evolving landscape of recruitment. Join RekBot and elevate your success to new dimensions! 🌟🤖</p>
+<h2 id="landing-page-sections">Landing Page Sections</h2>
+<h3 id="i-am-a">'I am a...'</h3>
+<h4 id="user-profile-1-new-starter-with-no-recruitment-experience">User Profile 1: New Starter with No Recruitment Experience</h4>
+<p><strong>Pitch:</strong> &quot;Embark on Your Recruitment Journey with Confidence! 🌟</p>
+<p>Are you eager to step into the dynamic world of recruitment but lack experience? Look no further – RekBot is your dedicated mentor, ready to guide you at every step! Our intuitive app combines years of recruitment wisdom with cutting-edge AI technology. RekBot offers real-time, personalized training that adapts to your schedule, whether you're at home or on the go.</p>
+<p>Imagine having your own pocket-sized recruitment expert available 24/7. RekBot will walk you through the intricacies, ensuring you're equipped with the skills to succeed. No experience? No problem. RekBot's AI-Trainers provide insights, strategies, and techniques that align with the evolving recruitment landscape. Get ready to thrive in your new career with RekBot by your side!&quot;</p>
+<h4 id="user-profile-2-recruitment-resources-or-consultant-looking-to-earn-more-money">User Profile 2: Recruitment Resources or Consultant Looking to Earn More Money</h4>
+<p><strong>Pitch:</strong> &quot;Unlock Your Full Earning Potential with RekBot! 💰</p>
+<p>As a dedicated recruitment resources or consultant, if you're hungry to turbocharge your income, RekBot is your ultimate ally! Our innovative app seamlessly merges years of recruitment expertise with cutting-edge AI capabilities, and it's tailored to fit into your bustling schedule.</p>
+<p>Imagine this: RekBot, your personal mentor, guiding you towards becoming a recruitment virtuoso. It's not just about constructing powerful call lists or handling objections – RekBot empowers you with personalized training to optimize your income. Rise to the pinnacle of the industry, armed with skills that set you apart.</p>
+<p>But there's more. RekBot doesn't stop at optimizing your calls – it guides you towards super efficiency, transforming your candidate calls and business development (BD) calls into potent opportunities for financial growth. Master the art of time management, elevate your call strategies, and refine your approach to maximize your earnings. With RekBot, you'll not only sharpen your skills but also unlock the door to financial success. Let RekBot pave the way to your financial triumph!&quot;</p>
+<h4 id="user-profile-3-new-team-leader-or-established-leader-aiming-for-more">User Profile 3: New Team Leader or Established Leader Aiming for More</h4>
+<p><strong>Pitch:</strong> &quot;From Team Leader to Visionary Leader – RekBot Has Your Back! 🌠</p>
+<p>Whether you're stepping into your first leadership role or you're a seasoned leader aspiring for greater team success, RekBot is your guiding light to realizing your leadership dreams! Our revolutionary app seamlessly merges recruitment wisdom with AI prowess to offer you a transformative leadership journey.</p>
+<p>As you navigate the transition from biller to billing manager, or if you're focused on driving higher team sales, RekBot's insights and strategies stand ready to guide you.</p>
+<p>But that's not all – RekBot delves into a rich tapestry of topics. You'll master the art of building and nurturing your team's culture, and with RekBot's support, you'll confidently handle employee situations through managerial self-assessment, ensuring thoughtful decision-making. You'll stay attuned to your team's pulse using the Manager Sanity Checklist, maintaining a harmonious and productive work atmosphere.</p>
+<p>For those challenging 'difficult' but 'talented' individuals, RekBot equips you with the skills to harness their potential. Seamlessly onboarding new team members? RekBot ensures a smooth and effective transition.</p>
+<p>Plus, RekBot helps you crack the code of billing and managing simultaneously – often considered the toughest role in recruitment. It's a game-changer, enabling you to reclaim time for billing while empowering your team to contribute more. Imagine the possibilities!</p>
+<p>Elevate your leadership skills, empower your team, and usher in a new era of success. RekBot propels you from mere leader to visionary leader, equipped with the knowledge to transform teams and drive results!&quot;</p>
+<h2 id="snippet-of-video">Snippet of Video</h2>
+<hr>
+<h3 id="section-3">SECTION 3</h3>
+<hr>
+<p>Of course, Dev Master CP! Here's the provided information for User Profile 4 and User Profile 5 formatted in Markdown:</p>
+<h3 id="user-profile-4-business-owner">User Profile 4: Business Owner</h3>
+<p><strong>Pitch:</strong> &quot;Scale Your Recruitment Business with Ease – Thanks to RekBot! 🚀</p>
+<p>As a business owner, your pursuit of seamless scaling is about to meet its perfect solution – RekBot! Our game-changing app redefines the landscape of your operations, fostering a culture of growth and mastery within your team. Say goodbye to the turbulence of inconsistent onboarding and training challenges.</p>
+<p>But the benefits of RekBot don't stop there – it's a growth catalyst unlike any other, offering insights drawn from tried-and-true scaling methods, now supercharged by AI. Dive into a treasure trove of topics, including the craft of effective scaling strategies, outsourcing tasks that sap your revenue, mastering the intricacies of financial management, and transforming into a cashflow powerhouse. No matter if you're steering a one-person startup or leading a rapidly scaling enterprise, RekBot imparts lessons that can drive you to unparalleled profitability and scalability. These newfound strengths enhance your appeal to investors and potential buyers alike.</p>
+<p>But let's take it a step further. RekBot is poised to become your business's secret weapon by generating AI-powered onboarding programs for new hires. Imagine consistent, effective onboarding that leads to quicker ROI from your fresh staff members. With RekBot in play, you'll not only scale intelligently but also ensure that your team grows with a solid foundation.</p>
+<p>Don't let your business's potential be tethered by time-consuming tasks. Let RekBot be your guide toward freeing up your time and scaling with precision. Embrace the transformative power of RekBot and witness your business flourish in ways you once only dreamt of!&quot;</p>
+<p><em>Snippet of video</em></p>
+<h3 id="user-profile-5-talent-acquisition-consultant">User Profile 5: Talent Acquisition Consultant</h3>
+<p><strong>Pitch:</strong> &quot;Elevate Your Talent Acquisition Consultancy with RekBot! 🌐</p>
+<p>In the fiercely competitive realm of talent recruitment, standing out as a Talent Acquisition Consultant requires a multidimensional approach. RekBot grasps this challenge, which is why it seamlessly melds years of industry wisdom with cutting-edge AI capabilities to revolutionize your consultancy strategy.</p>
+<p>While RekBot continues to refine your sourcing strategies and enhance your candidate engagement techniques – the cornerstones of its power – it also equips you with a broader skill set to thrive as a consultant:</p>
+<ul>
+<li>RekBot empowers you to harness data-backed insights for better-informed recruitment choices. This translates to strategies that seamlessly align with evolving market trends.</li>
+<li>Nurture a strategic mindset with RekBot, enabling you to craft and execute recruitment strategies that impeccably align with your clients' overarching business objectives.</li>
+<li>Shift your stakeholder approach from 'jump-and-respond' to cultivating a consultative partnership. RekBot guides you in building interactions that are meaningful, impactful, and geared towards collaboration.</li>
+<li>With RekBot's guidance, forecasting accuracy becomes your forte. Develop precise projections that steer your talent acquisition efforts with unparalleled precision.</li>
+</ul>
+<p>And there's more – RekBot's capabilities extend beyond insights and strategies. Imagine harnessing its AI power to create bespoke onboarding programs for new team members. These programs not only expedite integration but also ensure a positive candidate experience right from the start, guarding against pitfalls that can mar a candidate's initial days at your company.</p>
+<p>RekBot isn't just an app; it's your partner in consultancy excellence, propelling your talent acquisition journey toward unprecedented success. Incorporate AI-powered insights, strategies, and a comprehensive skill set into your consultancy repertoire. Embrace RekBot and elevate your consultancy game to new heights!&quot;</p>
+<p><em>Snippet of video</em></p>
+<p><strong>GIFs giving feedback. I.e., if it's good, pick a GIF of 'clapping well done'.</strong></p>
+<p><strong>Answer these questions:</strong></p>
+<ol>
+<li>What are the unfair advantages we have?</li>
+<li>Does my network give quick market access? Influencer/founders/podcasts.</li>
+<li>What are the key problems I'm trying to solve?</li>
+<li>How are we unique, why would someone pay, and what would they pay?</li>
+</ol>
+<hr>
+<h3 id="section-4">SECTION 4</h3>
+<hr>
+<h2 id="validate-the-idea">Validate the idea</h2>
+<h3 id="evaluation-phase">Evaluation phase</h3>
+<h4 id="pricing">Pricing:</h4>
+<ul>
+<li>Do people pay for level 1, 2, and 3?</li>
+<li>Do they pay monthly for ongoing and all access to each level as they progress? Can they build their own training cart and be charged based on what they actually want? They get it for a limited time this way.</li>
+<li>Subscription per user for onboarding as and when needed. One-off fee. Onboard my new starters for like $100, 1 week, then they have to pick a way to move forward using the app.</li>
+</ul>
+<h2 id="create-ai-landing-page">Create AI landing page:</h2>
+<p><a href="https://www.mixo.io/">https://www.mixo.io/</a></p>
+<ul>
+<li>Not far off tech: <a href="https://www.youtube.com/watch?v=z6z-TqPYoqc">https://www.youtube.com/watch?v=z6z-TqPYoqc</a></li>
+<li>Text to speech:</li>
+<li>Speech to video: <a href="https://www.d-id.com/">https://www.d-id.com/</a></li>
+<li>Synthesia</li>
+<li><a href="https://elevenlabs.io/">https://elevenlabs.io/</a></li>
+<li>SpeechKI plugin?</li>
+<li>No-Code AI Avatar: <a href="https://overment.gumroad.com/l/avatar?ref=theresanaiforthat">https://overment.gumroad.com/l/avatar?ref=theresanaiforthat</a></li>
+</ul>
+<h3 id="git-suggestions">Git suggestions:</h3>
+<ul>
+<li><a href="https://diassadykov.substack.com/p/i-built-an-ai-avatars-generator-using">https://diassadykov.substack.com/p/i-built-an-ai-avatars-generator-using</a>
+<a href="https://www.parallaxai.app/">https://www.parallaxai.app/</a>
+Apple's Neural Engine?</li>
+<li><a href="https://www.youtube.com/watch?v=8MV2mjjQFSU&amp;t=26s">https://www.youtube.com/watch?v=8MV2mjjQFSU&amp;t=26s</a></li>
+<li><a href="https://callannie.ai/call">https://callannie.ai/call</a></li>
+<li><a href="https://huggingface.co/spaces/JavaFXpert/Chat-GPT-LangChain">https://huggingface.co/spaces/JavaFXpert/Chat-GPT-LangChain</a>
+Fiverr?</li>
+</ul>
+<h3 id="fiverr-gigs">Fiverr Gigs:</h3>
+<ul>
+<li><a href="https://www.fiverr.com/s/3l8yex">https://www.fiverr.com/s/3l8yex</a></li>
+<li><a href="https://www.fiverr.com/s/pNd90o">https://www.fiverr.com/s/pNd90o</a></li>
+</ul>
+<p><a href="https://youtu.be/jC4v5AS4RIM?si=qU3GerIk_nfPo8Kd">https://youtu.be/jC4v5AS4RIM?si=qU3GerIk_nfPo8Kd</a></p>
+<ul>
+<li>How can images or short video examples be integrated into the training? I.e., show along to what is being trained to give context/examples/visuals. Can the showme plug-in be used?</li>
+<li>Creating content assistant: ChatGPT plug-ins (Beta features/plugins/switch on)</li>
+<li>Link reader</li>
+<li>Video insights</li>
+</ul>
+<p>Ask your PDF (maybe for the Resume scanner?)</p>
+<h2 id="show-me">Show me</h2>
+<ul>
+<li>Commuter Version: reduced app version for offline: Quizzes</li>
+<li>Conversation downloads (where they have practiced, listen back)</li>
+<li>Unable to copy and paste anything from the app/website</li>
+</ul>
+<h3 id="resource-level-1---have-to-pass-shit-to-get-to-the-next-training-course-dripify-style-etc">Resource level 1 - have to pass shit to get to the next training course, Dripify style, etc.</h3>
+<h4 id="ta-level-1">TA Level 1</h4>
+<p>employer branding; social activities</p>
+<h4 id="bd-level-1">BD level 1</h4>
+<ul>
+<li><a href="https://youtu.be/oi7bnS8uyJM?si=_fSkDtPV0PA34hXr">https://youtu.be/oi7bnS8uyJM?si=_fSkDtPV0PA34hXr</a></li>
+</ul>
+<p>&quot;Customize your interactions with ChatGPT by providing specific details and guidelines for your chats. Whenever you edit your custom instructions, they'll take effect in all new chats you create. Existing chats won't be updated.&quot;</p>
+<p>Platform recognizes the user and calls him/her by name, sending notifications of milestones like the first week, 1st month, and probation pass.</p>
+<p>Also suggests/reminds via push notifications that training is outstanding (Duolingo style). Creates a completion % of training modules that managers can log into. Recognizes a person's voice or face so people don't buy one license and use it for the whole office.</p>
+<ul>
+<li>What can be made available offline?</li>
+</ul>
+<hr>
+<h3 id="section-5">SECTION 5</h3>
+<hr>
+<h3 id="languages">Languages:</h3>
+<ul>
+<li>
+<p>Can ChatGPT translate into all languages?</p>
+</li>
+<li>
+<p>Content: interactive quizzes, podcasts, articles, and more. Must cater to different learning styles and preferences to keep users engaged.</p>
+</li>
+<li>
+<p>Personalized Learning Paths: Provide users with customized learning paths based on their goals, skill levels, and interests. Personalization enhances engagement by making the content relevant and tailored to each user.</p>
+</li>
+<li>
+<p>Assess goals: short term, mid and long term</p>
+</li>
+<li>
+<p>AI onboarding: Client Portal login and Candidate portal log in</p>
+</li>
+<li>
+<p>Client login: Checklist of duties and activities they have to complete, can see candidate progress</p>
+</li>
+<li>
+<p>Client has to provide: Expectations of manager/company set - probationary pass expectations set. Daily/weekly/monthly/quarterly targets. Incentive plans. Key hints and tips from some of the company's top billers. HR policy/company handbook / commission - how/when/payday/pensions+benefits. Link to CRM/ATS system training videos, usually available on Youtube or on their website.</p>
+</li>
+</ul>
+<h3 id="candidate-log-in-below">Candidate log in: below</h3>
+<ul>
+<li>
+<p>What makes a good recruiter, mindset, attributes, What a day looks like as a good recruiter, CRM use, Company info/USP, Customers, market they are in with key trends etc, expectations of manager/company set and understood - probationary pass expectations set. Daily/weekly/monthly/quarterly targets. Incentive plans with calculator to show what can be earned + all benefits available. All HR policy. Meet colleagues virtually if not office based. How to structure yourself for success, daily, hourly, weekly. Key hints and tips from some of the industry's top billers.</p>
+</li>
+<li>
+<p>People need to enter to generate an ‘about me’ so the candidate can learn the value prop of the company they work for:</p>
+<ul>
+<li>Company URL</li>
+<li>Geographies serviced</li>
+<li>Industry recruiting for can you give me an overview of the XYZ recruitment space in the 'Geography'</li>
+</ul>
+</li>
+<li>
+<p>Type of candidates delivered:</p>
+<ul>
+<li>Perm, Contract, Term</li>
+</ul>
+</li>
+</ul>
+<h3 id="question-to-ask-chatgpt">Question to ask ChatGPT:</h3>
+<p>What are some of the key challenges in identifying ‘Perm/Temp/Contract’ drivers in the XYZ industry that a recruiter might find:</p>
+<ul>
+<li>Company Linkedin</li>
+<li>Link/copy and paste to any content prompting the company/services</li>
+<li>Testimonials of clients or candidates link or copy/paste</li>
+<li>Link to clients page/or provide URL</li>
+<li>A written transcript of the value proposition of the company and why someone would use their services from the owner. Can even be a brainstorming, ideas page that ChatGPT turns into something useable if the client doesn't have that ready. &quot;Don't have that ready, ok just tell me in your own words why someone would use your company, what makes you unique&quot;</li>
+</ul>
+<h3 id="or-manually-input-the-above">Or manually input the above</h3>
+<p>ChatGPT to make a summary of all the information at the end and create an onboarding sheet specifically for that person in that company using that information and make it</p>
+<h3 id="available-offline">Available offline:</h3>
+<p>Create an onboarding quiz</p>
+<hr>
+<h3 id="section-6">SECTION 6</h3>
+<hr>
+<h3 id="ai-training">AI Training:</h3>
+<p>Micro Learning Modules: Break down lessons into bite-sized modules that users can complete in short time frames. Micro learning allows for quick, focused learning sessions that fit into users' busy schedules. Short sharp shark tank training.</p>
+<ol>
+<li>Quick fire BD objection handling Easy/Medium/Hard</li>
+<li>Random question round</li>
+<li>Time management quiz - based on <a href="https://harver.com/blog/time-management-strategies-for-recruiters/">Time Management Strategies for Recruiters</a></li>
+</ol>
+<h3 id="recruiters-new--old">Recruiters New &amp; Old:</h3>
+<ul>
+<li>
+<p>BD: perm, contract, temp. Negotiation (Tone of voice, tempo)</p>
+</li>
+<li>
+<p>Selling a CV - Taking a CV to market</p>
+</li>
+<li>
+<p>Selling on value</p>
+</li>
+<li>
+<p>Routes to cash and how</p>
+</li>
+<li>
+<p>What can be automated/outsourced</p>
+</li>
+<li>
+<p>Resourcing: also links to ChatGPT to give variants of Job titles, keywords, target companies, create interview questions (based on industry/geography given in onboarding section) and what answers to look for, cultural and hard/soft skills.</p>
+</li>
+<li>
+<p>The recruitment process explained:</p>
+</li>
+<li>
+<p>What makes a good candidate</p>
+</li>
+<li>
+<p>The bullshit radar</p>
+</li>
+<li>
+<p>Know your Client and Candidate: Question for ChatGPT: what is the client/candidate landscape in the recruitment industry for XYZ</p>
+</li>
+<li>
+<p>Writing Job Ads: Can we program ChatGPT to write job ads based on some metrics? Can we create a template that can be populated by the candidate or the hiring manager that identifies the key points needed by the resources when interviewing a candidate? Input/parse JD and it auto creates an interview criteria? What are the key selling points hiring managers latch onto when agreeing to interview a candidate in your space? Can ChatGPT create a question per the above? I.e. Sales Interview</p>
+</li>
+</ul>
+<h4 id="question-can-you-make-some-interview-questions-that-will-identify-a-candidates-experience-or-ability-with">Question: Can you make some interview questions that will identify a candidate's experience or ability with</h4>
+<ul>
+<li>Tech Sold Relevant: Departments Sold to:</li>
+<li>Clients in the last 12 months where deals he/she has closed:</li>
+<li>Tenure in last 3 roles + reasons for leaving:</li>
+<li>Startup Experience Building from Scratch:</li>
+<li>New Logos won with no SDR/Lead Support involvement:</li>
+</ul>
+<h3 id="answers">Answers:</h3>
+<p>Certainly, here are some interview questions that can help you identify a candidate's experience and ability in the mentioned areas:</p>
+<p><strong>Tech Sold Relevant:</strong></p>
+<ul>
+<li>Can you provide examples of the technical products or services you've sold in your previous roles?</li>
+<li>How familiar are you with the technical aspects of the products/services you've sold? Can you give us an example of how you explained these technical details to a non-technical client?</li>
+</ul>
+<p><strong>Departments Sold to:</strong></p>
+<ul>
+<li>Which departments within a company have you successfully sold to in the past? Can you share your approach to tailoring your sales pitch to different departments?</li>
+<li>Can you provide a specific instance where you successfully sold your product/service to a challenging department?</li>
+</ul>
+<p><strong>Clients in the Last 12 Months:</strong></p>
+<ul>
+<li>Could you tell us about a recent deal you closed in the last 12 months? What challenges did you face, and how did you overcome them?</li>
+<li>How do you maintain relationships with clients after the deal is closed? Can you provide an example of a client you've successfully retained?</li>
+</ul>
+<p><strong>Tenure in Last 3 Roles + Reasons for Leaving:</strong></p>
+<ul>
+<li>Can you walk us through your last three roles? What were your responsibilities and achievements in each role?</li>
+<li>What prompted you to leave your previous roles? Can you describe your decision-making process when evaluating new opportunities?</li>
+</ul>
+<p><strong>Startup Experience Building from Scratch:</strong></p>
+<ul>
+<li>Have you worked in a startup environment where you had to build a client base from scratch? How did you approach this challenge?</li>
+<li>Can you share a specific example of how you contributed to the growth of a startup? What strategies did you implement to attract clients?</li>
+</ul>
+<p><strong>New Logos Won with No SDR/Lead Support Involvement:</strong></p>
+<ul>
+<li>Share an example of a deal where you acquired a new client without the support of SDRs or lead generation. How did you identify and approach this client?</li>
+</ul>
+<hr>
+<h3 id="section-7">SECTION 7</h3>
+<hr>
+<h3 id="interview-questions">Interview Questions:</h3>
+<ul>
+<li>Have you been able to win new clients without the support of a sales development representative or lead generation team? Could you share an example?</li>
+<li>How do you identify potential clients and initiate contact when you don't have the support of pre-generated leads?</li>
+<li>Remember, these questions are designed to assess a candidate's experience and abilities in specific areas. Adapt them to the role and context of your organization's needs.</li>
+</ul>
+<h3 id="skills-assessment">Skills Assessment:</h3>
+<ul>
+<li>Hard skills: ?</li>
+<li>Soft skills: Language/communication skills/?</li>
+<li>Experiences: Reason for leaving/salary/notice period/benefits/etc</li>
+</ul>
+<h3 id="question-for-chatgpt">Question for ChatGPT:</h3>
+<p>What is the basic information needed to write a good, D&amp;I inclusive job description in the XYZ industry?</p>
+<h3 id="training-resources">Training Resources:</h3>
+<ul>
+<li>How to use LinkedIn/recruiter: <a href="https://vengreso.com/blog/what-is-linkedin-recruiter">LinkedIn Recruiter Guide</a></li>
+<li>Building call lists and being prepared for the day ahead of the day. PPPPP</li>
+<li>Messages that attract a response:</li>
+<li>Boolean searching - <a href="https://dripify.io/boolean-search-on-linkedin/">LinkedIn Boolean Search</a></li>
+<li>The art of nurturing leads</li>
+<li>Xray searching <a href="https://resources.workable.com/hr-terms/what-is-google-x-ray-search">Google X-Ray Search</a></li>
+<li>Xing Germany</li>
+<li>The conversion machine leads to conversion - Jobs/candidates</li>
+<li>Nurturing business introducers</li>
+<li>NPS &amp; introducer programs</li>
+<li>Job boards, how to use/post/find (Make them country specific)</li>
+<li>Social media advertising</li>
+<li>Personalized Email outreach</li>
+<li>Automating LinkedIn via dripify (affiliate link)</li>
+<li>How to build desk plans: use my guide</li>
+<li>How to build BD lists: Use my guide</li>
+<li>Time management: doc created</li>
+<li>Mastering Productivity / Efficiency</li>
+<li>Negotiating terms and what to make sure your agreement covers</li>
+<li>Podcasts in recruitment</li>
+<li>Blogs and articles relevant to recruitment</li>
+<li>Make a quiz</li>
+<li>The multiple vessels to win a new client</li>
+<li>Working with a Consultant as a Resources</li>
+<li>Getting a Clear Perspective On a Project - GOld job hunting</li>
+<li>Selecting the right customer - your avatar</li>
+<li>Key Accounts and RPO Business Development</li>
+<li>Service Models Perm</li>
+<li>Contract Augmented Teams / SoW</li>
+<li>Working with a resources or offshore delivery team</li>
+<li>Why would a candidate reject the offer</li>
+<li>Prepping Candidate</li>
+<li>Taking Candidate feedback</li>
+<li>Interview Feedback from Clients</li>
+<li>Killer questions and how to ask a client for KQ’s and how to cover them quickly with your candidates.</li>
+<li>How to get the most out of events, celebrations, job changes, etc on LinkedIn</li>
+<li>Being seen as credible/the authority so the hiring managers respect your calls</li>
+<li>Data-driven decision making</li>
+<li>How to accurately forecast candidate pipelines ( follow on from bull shit radar and proper qualification of candidates)</li>
+<li>How to pipelines sales/BD pipelines</li>
+<li>Managing PSL/suppliers</li>
+<li>Using google alerts, otta, <a href="https://salesbluebird.pallet.com/jobs">Sales Bluebird</a> - Find your lead source</li>
+<li>D&amp;I guide</li>
+<li>Schedule interviews with Calendly</li>
+<li>Client Management</li>
+<li>Candidates process management</li>
+<li>How to pitch retained</li>
+<li>How to pitch RPO</li>
+<li>How to pitch SoW / Staff augmentation.</li>
+<li>Web scraping tools</li>
+</ul>
+<h3 id="recruitment-leadership-training">Recruitment Leadership Training:</h3>
+<p>New managers or even established managers upskilling</p>
+<ul>
+<li>The Team Management playbook: Building your team/culture</li>
+<li>Managerial self-assessment prior to acting to remove an employee</li>
+<li>Manager Sanity Checklist (have our finger on the team pulse)</li>
+<li>Managing a ‘difficult’ but ‘Talented’ individual.</li>
+</ul>
+<h3 id="investment-guide">Investment Guide:</h3>
+<p>Complete my investment guide, set up a business plan as if you were trying to get investment. Then pitch it to someone if you need investment or not! Find the gaps before the gaps find you</p>
+<h3 id="hiring">Hiring:</h3>
+<p>What does your dream team look like?
+Detail each role, their desk industry/roles, the skills/culture of the person, the JD, expectations,</p>
+<h3 id="accountability">Accountability:</h3>
+<p>How are we accountable in management/leadership</p>
+<h3 id="pi-testing">PI Testing:</h3>
+<p>PI testing new applicants with this platform and internal teams and then suggesting training/lookouts on the back of results.</p>
+<hr>
+<h3 id="section-8">SECTION 8</h3>
+<hr>
+<h3 id="building-and-scaling-a-recruitment-business">Building and Scaling a Recruitment Business:</h3>
+<ul>
+<li>How to build your niche/build your desk</li>
+<li>How to build targets/forecasting/budgets</li>
+<li>Candidate or client lead market?</li>
+<li>Do a happiness score now of what the ownership looks like and then create a scenario in time of where you want to be, this plan is recorded over time to get there.</li>
+<li>Revenue goals</li>
+<li>Consistency goals</li>
+<li>Systems</li>
+</ul>
+<h3 id="self-assessment-score-card">Self-Assessment Score Card:</h3>
+<p>Build a self-assessment score card: on where someone is spending their time, reviewing own performance vs goals (money-making plan), one's own niche/ideal target client/candidate, how well systemized are BD process/is there a step-by-step guide/training, is the market mapped. How automated is your lead gen machine? How effective are you at pitching/identifying/converting candidates or leads. Sporadic or locked down.</p>
+<h3 id="conversion">Conversion:</h3>
+<ul>
+<li>How clear and confident are you in screening candidates/clients, how well documented is this process. Chit chat system or documented/scripted process.</li>
+<li>How clear and confident are you winning retained/exclusive/RPO business. What are your metrics? 80/100%? Exclusivity on candidates/Clients?</li>
+<li>Automate/delegate - how future-proof is your business. Would your business operate without you, do you have more than 8 weeks cashflow in the bank, are you inconsistent with revenue? Can you predict the next 6 months' revenue?</li>
+</ul>
+<h3 id="owners-current-situation">Owner's Current Situation:</h3>
+<p>Build a FIFA style spider diagram on an owner's current situation. Aiming for a balanced triangle.</p>
+<h3 id="learning-styles">Learning Styles:</h3>
+<ul>
+<li>Info-based learning</li>
+<li>Experiential learning</li>
+</ul>
+<h3 id="leadership">Leadership:</h3>
+<p>What kind of leader are you or do you want to be:</p>
+<ol>
+<li>The business revolved around you - you have no time, you have cash but are a slave to the business</li>
+<li>Chief of Everything - you have some systems in place and processes that others have implemented for you, it's your idea but you totally outsourced it. You are the conductor so you can't play all the instruments, nor can the band play without you</li>
+</ol>
+<h3 id="business-focus">Business Focus:</h3>
+<p>Do you want a business based on:</p>
+<ol>
+<li>Quantity: lots of jobs/candidates/desks/niches - 10/15% fees, transactional business</li>
+<li>Quality focused, niche/expert player
+Have to complete the desk strategy per desk but have to have one for the overall business</li>
+</ol>
+<h3 id="building-systems">Building Systems:</h3>
+<p>Building systems that do more for less work:</p>
+<ol>
+<li>Leads Attraction machine - how to attract leads for candidates and clients</li>
+<li>Conversions into - Gold jobs or most valuable candidates</li>
+<li>Fulfillment machine - service delivery</li>
+<li>Economic delivery - back office outsource but understand it
+Because we have clients and candidates we need two vessels for growth. Candidate growth / client growth
+Make it a weekly challenge and give points/awards/rewards for ticking boxes:</li>
+</ol>
+<ul>
+<li>1 man band</li>
+<li>2-10</li>
+<li>10 - scale</li>
+<li>Scale to sale</li>
+</ul>
+<h3 id="business-optimization">Business Optimization:</h3>
+<p>What is the clutter in your business you can get rid of?
+What shit is someone else's gold? Can you afford to give them your gold?</p>
+<h3 id="job-descriptions-downloadable">Job Descriptions (Downloadable):</h3>
+<ul>
+<li>You as the leader - Alison gave me JD</li>
+<li>Second in command - delivery person to scale with BD team or Delivery team</li>
+<li>Sales/Admin/va - person</li>
+<li>Marketing person</li>
+<li>Back office</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>modelImplentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="assessment-models-implemention--expected-data">Assessment Models Implemention &amp; Expected Data</h1>
+<h2 id="1-tone-and-vocal-quality-ser">1. Tone and Vocal Quality (SER)</h2>
+<h2 id="ser-output">SER Output</h2>
+<p>The SER model usually classifies emotions into predefined categories such as &quot;Happy,&quot; &quot;Sad,&quot; &quot;Angry,&quot; &quot;Neutral,&quot; etc., based on the features extracted from the audio signal. These features can include pitch, energy, and formants, among others. The output might look something like this:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"Happy"</span>: <span class="hljs-number">0.7</span>,
+  <span class="hljs-attr">"Sad"</span>: <span class="hljs-number">0.1</span>,
+  <span class="hljs-attr">"Angry"</span>: <span class="hljs-number">0.1</span>,
+  <span class="hljs-attr">"Neutral"</span>: <span class="hljs-number">0.1</span>
+}
+</div></code></pre>
+<p>Here, the numbers represent the probability or confidence level that the model has in its classification. In this example, the model is 70% confident that the tone is &quot;Happy.&quot;</p>
+<p>Translating to Ratings
+To translate this into a rating system for &quot;Tone and Vocal Quality,&quot; you could map the emotional categories to the attributes you're interested in, such as warmth, confidence, and sincerity.</p>
+<p><strong>For example:</strong></p>
+<ul>
+<li>&quot;Happy&quot; and &quot;Neutral&quot; tones could be indicative of warmth.</li>
+<li>&quot;Angry&quot; and &quot;Happy&quot; tones could be indicative of confidence.</li>
+<li>&quot;Neutral&quot; and &quot;Sad&quot; tones could be indicative of sincerity.</li>
+<li>You could then use a weighted average formula to calculate the ratings for each attribute. Here's a simplified example:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-2</span>
+<span class="hljs-comment"># Filename: ser_to_rating.py</span>
+<span class="hljs-comment"># PY-2-FN-1: Function to translate SER output to ratings</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ser_to_rating</span><span class="hljs-params">(ser_output)</span>:</span>
+    warmth = (ser_output[<span class="hljs-string">'Happy'</span>] * <span class="hljs-number">0.6</span>) + (ser_output[<span class="hljs-string">'Neutral'</span>] * <span class="hljs-number">0.4</span>)
+    confidence = (ser_output[<span class="hljs-string">'Angry'</span>] * <span class="hljs-number">0.5</span>) + (ser_output[<span class="hljs-string">'Happy'</span>] * <span class="hljs-number">0.5</span>)
+    sincerity = (ser_output[<span class="hljs-string">'Neutral'</span>] * <span class="hljs-number">0.5</span>) + (ser_output[<span class="hljs-string">'Sad'</span>] * <span class="hljs-number">0.5</span>)
+    
+    <span class="hljs-comment"># Convert to 1-10 scale</span>
+    warmth_rating = round(warmth * <span class="hljs-number">10</span>)
+    confidence_rating = round(confidence * <span class="hljs-number">10</span>)
+    sincerity_rating = round(sincerity * <span class="hljs-number">10</span>)
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'Warmth'</span>: warmth_rating,
+        <span class="hljs-string">'Confidence'</span>: confidence_rating,
+        <span class="hljs-string">'Sincerity'</span>: sincerity_rating
+    }
+</div></code></pre>
+<h2 id="2-pacing-comprehension-and-comfort">2. Pacing (Comprehension and Comfort)</h2>
+<h3 id="praat-output">Praat Output</h3>
+<p>Praat is a tool often used for phonetic analysis, including the measurement of speech rate. It can provide detailed information about the duration of phonemes, syllables, and pauses in the speech. A typical output might look like this:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"PhonemeDuration"</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.15</span>, ...],
+  <span class="hljs-attr">"SyllableDuration"</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">0.35</span>, ...],
+  <span class="hljs-attr">"PauseDuration"</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.2</span>, ...]
+}
+</div></code></pre>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>To translate this into a rating for &quot;Pacing,&quot; you could calculate the average duration of phonemes, syllables, and pauses, and then normalize these values to fit into a 1-10 scale. The idea is to find a pacing score that matches the complexity of the information being shared.</p>
+<p>Here's a Python function that could perform this translation:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-1</span>
+<span class="hljs-comment"># Filename: praat_to_rating.py</span>
+<span class="hljs-comment"># PY-1-FN-1: Function to translate Praat output to pacing rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">praat_to_rating</span><span class="hljs-params">(praat_output)</span>:</span>
+    avg_phoneme_duration = sum(praat_output[<span class="hljs-string">'PhonemeDuration'</span>]) / len(praat_output[<span class="hljs-string">'PhonemeDuration'</span>])
+    avg_syllable_duration = sum(praat_output[<span class="hljs-string">'SyllableDuration'</span>]) / len(praat_output[<span class="hljs-string">'SyllableDuration'</span>])
+    avg_pause_duration = sum(praat_output[<span class="hljs-string">'PauseDuration'</span>]) / len(praat_output[<span class="hljs-string">'PauseDuration'</span>])
+    
+    <span class="hljs-comment"># Normalize and weight the averages</span>
+    pacing_score = (avg_phoneme_duration * <span class="hljs-number">0.3</span>) + (avg_syllable_duration * <span class="hljs-number">0.4</span>) + (avg_pause_duration * <span class="hljs-number">0.3</span>)
+    
+    <span class="hljs-comment"># Convert to 1-10 scale (assuming 1 is slowest and 10 is fastest)</span>
+    pacing_rating = round(<span class="hljs-number">10</span> - (pacing_score * <span class="hljs-number">10</span>))
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'Pacing'</span>: pacing_rating
+    }
+</div></code></pre>
+<h2 id="3-use-of-silence-thoughtfulness-and-respect">3. Use of Silence (Thoughtfulness and Respect)</h2>
+<h3 id="vad-output">VAD Output</h3>
+<p>Voice Activity Detection (VAD) typically outputs binary flags indicating whether each segment of audio contains voice activity or silence. For example:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"VoiceActivity"</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, ...]
+}
+</div></code></pre>
+<p>Here, 1 indicates voice activity and 0 indicates silence.</p>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>You could calculate the ratio of silence to voice activity and then assess how effectively silence is used for emphasis or reflection.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-3</span>
+<span class="hljs-comment"># Filename: vad_to_rating.py</span>
+<span class="hljs-comment"># PY-3-FN-1: Function to translate VAD output to silence rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vad_to_rating</span><span class="hljs-params">(vad_output)</span>:</span>
+    total_segments = len(vad_output[<span class="hljs-string">'VoiceActivity'</span>])
+    silence_segments = vad_output[<span class="hljs-string">'VoiceActivity'</span>].count(<span class="hljs-number">0</span>)
+    
+    <span class="hljs-comment"># Calculate effective use of silence</span>
+    effective_silence = (silence_segments / total_segments) * <span class="hljs-number">10</span>
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'EffectiveUseOfSilence'</span>: round(effective_silence)
+    }
+</div></code></pre>
+<h2 id="4-audibility-and-clarity-pesq">4. Audibility and Clarity (PESQ)</h2>
+<h3 id="pesq-output">PESQ Output</h3>
+<p>PESQ usually outputs a Mean Opinion Score (MOS) between -0.5 and 4.5, where higher scores indicate better quality.</p>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>The MOS can be linearly scaled to a 1-10 rating for audibility and clarity.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-4</span>
+<span class="hljs-comment"># Filename: pesq_to_rating.py</span>
+<span class="hljs-comment"># PY-4-FN-1: Function to translate PESQ output to audibility and clarity rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pesq_to_rating</span><span class="hljs-params">(mos_score)</span>:</span>
+    <span class="hljs-comment"># Scale MOS to 1-10</span>
+    scaled_score = (mos_score + <span class="hljs-number">0.5</span>) * <span class="hljs-number">2</span>
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'AudibilityAndClarity'</span>: round(scaled_score)
+    }
+</div></code></pre>
+<h2 id="5-interruption-handling-rasa">5. Interruption Handling (Rasa)</h2>
+<h3 id="rasa-output">Rasa Output</h3>
+<p>Rasa could be customized to output logs that indicate how interruptions were managed. For example, it could output a count of interruptions and how they were resolved.</p>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>You could rate the conversation based on the number of interruptions and how well they were managed.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-5</span>
+<span class="hljs-comment"># Filename: rasa_to_rating.py</span>
+<span class="hljs-comment"># PY-5-FN-1: Function to translate Rasa output to interruption handling rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rasa_to_rating</span><span class="hljs-params">(interruption_count, resolved_count)</span>:</span>
+    <span class="hljs-comment"># Calculate effective interruption handling</span>
+    effective_handling = (resolved_count / interruption_count) * <span class="hljs-number">10</span>
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'InterruptionHandling'</span>: round(effective_handling)
+    } 
+</div></code></pre>
+<h2 id="6-verbal-affirmations-witai">6. Verbal Affirmations (Wit.ai)</h2>
+<h3 id="witai-output">Wit.ai Output</h3>
+<p>Wit.ai could output a list of recognized verbal affirmations and their appropriateness in the context.</p>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>You could rate the conversation based on the number and appropriateness of verbal affirmations.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-6</span>
+<span class="hljs-comment"># Filename: witai_to_rating.py</span>
+<span class="hljs-comment"># PY-6-FN-1: Function to translate Wit.ai output to verbal affirmations rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">witai_to_rating</span><span class="hljs-params">(affirmation_count, appropriateness_score)</span>:</span>
+    <span class="hljs-comment"># Calculate effective verbal affirmations</span>
+    effective_affirmations = ((affirmation_count + appropriateness_score) / <span class="hljs-number">2</span>) * <span class="hljs-number">10</span>
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'VerbalAffirmations'</span>: round(effective_affirmations)
+    }
+</div></code></pre>
+<h2 id="7-non-verbal-sounds-audioset">7. Non-Verbal Sounds (AudioSet)</h2>
+<h3 id="audioset-output">AudioSet Output</h3>
+<p>AudioSet could output a list of recognized non-verbal sounds like sighs, laughter, or pauses, and their impact on the conversation's tone and meaning.</p>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>You could rate the conversation based on the impact of these non-verbal sounds.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-7</span>
+<span class="hljs-comment"># Filename: audioset_to_rating.py</span>
+<span class="hljs-comment"># PY-7-FN-1: Function to translate AudioSet output to non-verbal sounds rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">audioset_to_rating</span><span class="hljs-params">(impact_score)</span>:</span>
+    <span class="hljs-comment"># Scale impact score to 1-10</span>
+    scaled_score = impact_score * <span class="hljs-number">10</span>
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'NonVerbalSounds'</span>: round(scaled_score)
+    }
+</div></code></pre>
+<h2 id="8-call-technical-quality-webrtc">8. Call Technical Quality (WebRTC)</h2>
+<h3 id="webrtc-output">WebRTC Output</h3>
+<p>WebRTC could output metrics like latency, packet loss, and jitter, which could be used to assess call quality.</p>
+<h3 id="translating-to-ratings">Translating to Ratings</h3>
+<p>You could rate the call based on these technical metrics.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># PY-8</span>
+<span class="hljs-comment"># Filename: webrtc_to_rating.py</span>
+<span class="hljs-comment"># PY-8-FN-1: Function to translate WebRTC output to call technical quality rating</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">webrtc_to_rating</span><span class="hljs-params">(latency, packet_loss, jitter)</span>:</span>
+    <span class="hljs-comment"># Calculate effective call quality</span>
+    effective_quality = <span class="hljs-number">10</span> - ((latency + packet_loss + jitter) / <span class="hljs-number">3</span>)
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'CallTechnicalQuality'</span>: round(effective_quality)
+    }
+</div></code></pre>
+
+</body>
+</html>

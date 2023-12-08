@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>formattedDialogue.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="formatted-dialogue">Formatted Dialogue</h1>
+<h2 id="dialogue-between-ceo-and-tech-recruiter">Dialogue between CEO and Tech Recruiter</h2>
+<h3 id="ceo-objection-i-use-my-own-network">CEO objection: I Use My Own Network</h3>
+<p><strong>Tech Recruiter:</strong> Absolutely, I completely understand the value of leveraging your personal networks. Many of our clients also bring their connections into the mix while working with us. It's important to ensure access to the top-tier talent pool, especially as your business continues to grow. By collaborating with me, you're gaining access to my specialized expertise in this space. I have a knack for identifying individuals who might not be on your radar yet have demonstrated remarkable achievements. This doesn't diminish the value of your internal referrals; it complements them.</p>
+<p><strong>Tech Recruiter:</strong> Here's my proposition: I'm offering you a complimentary service where I'll present you with the best available candidates from this market today, in addition to the ones from your network. I believe that your priority is to secure the ideal candidate for the position. If I can provide you with individuals who stand head and shoulders above those within your immediate network, wouldn't you consider bringing them on board? Of course, if you're not convinced by the caliber of the candidates I put forth, you're under no obligation to proceed. The decision remains in your hands.</p>
+<h3 id="ceo-objection-have-an-internal-recruitment-team">CEO objection: Have an Internal Recruitment Team</h3>
+<p><strong>Tech Recruiter:</strong> Many of our clients indeed have internal teams, and I see that as an opportunity for collaboration. From my experience, internal teams possess strengths and areas where they might need additional support. What sets us apart is our ability to offer immediate value for complex roles and in regions demanding a dedicated focus. At Rekall Consulting, we're not limited to candidate sourcing; we also provide invaluable competitor and market analysis, enhancing the depth of our service during the search process.</p>
+<p><strong>Tech Recruiter:</strong> I'm curious about the challenging hires your internal team has encountered recently and how they've managed those situations. It's these kinds of scenarios where our specialization can really shine. By combining forces, we can address the gaps and bring more holistic solutions to the table.</p>
+<h3 id="ceo-objection-you-need-to-speak-to-hr">CEO objection: You need to speak to HR.</h3>
+<p><strong>Tech Recruiter:</strong> I completely understand the importance of HR in the recruitment process. To get a precise grasp of the talent you're seeking, it's crucial that I have a direct conversation with you. We thrive on showcasing your value proposition to the market and attracting top-tier candidates. This kind of insight comes directly from individuals who live and breathe your organization daily – your Hiring Managers. Their perspective is invaluable. Without this direct communication, our ability to source game-changing talent is compromised.</p>
+<p><strong>Tech Recruiter:</strong> While I'm more than willing to coordinate with HR, the insights they possess need to be supplemented with a deep understanding of your needs that can only come from direct dialogue. It enhances our chances of bringing you the finest talent that can truly make a difference.</p>
+<h3 id="ceo-objection-personnel--hr-have-that-information--job-brief">CEO objection: Personnel / HR have that information / Job brief.</h3>
+<p><strong>Tech Recruiter:</strong> I respect that HR might have a brief to offer that's suitable for conventional agencies. However, our approach involves directly engaging with candidates within the market. Our methodology is rooted in approaching potential candidates within the industry itself. This method greatly increases our chances of sourcing candidates who might not be actively job searching, but who possess the exact skills and qualifications you're looking for. Their experience is a precise fit for your requirements, which goes beyond what a standard brief might capture.</p>
+<p><strong>Tech Recruiter:</strong> If you're open to it, I'd be more than happy to accept a brief from HR. However, I would appreciate the chance to reconnect with you afterward to fill in any gaps that would enable us to sell your role more effectively to the top talent available in the market.</p>
+<h3 id="ceo-objection-yeah-i-think-thats-important-but-i-want-to-make-sure-were-getting-the-best-people-for-the-job">CEO objection: Yeah, I think that's important. But I want to make sure we're getting the best people for the job.</h3>
+<p><strong>Tech Recruiter:</strong> Absolutely, I'm here to ensure just that. In fact, I'm offering you a complimentary service that provides you with a selection of the top candidates available in the market today. You'll have the opportunity to evaluate these candidates alongside those from your network. Naturally, as a savvy businessperson, your primary goal is to secure the best fit for your team. If I present candidates who are head and shoulders above those in your network, wouldn't it make sense to consider them? However, if you're not convinced by the quality of the candidates I propose, there's no obligation to proceed. The decision rests entirely with you.</p>
+<h3 id="ceo-objection-okay-that-sounds-fair-but-we-do-have-an-internal-recruitment-team-in-place">CEO objection: Okay, that sounds fair. But we do have an internal recruitment team in place.</h3>
+<p><strong>Tech Recruiter:</strong> It's great that you have an internal team. In fact, many of my clients operate with internal teams as well. I'm more than willing to work alongside your team. From my experience, internal teams excel in specific areas of recruitment but might face challenges with more specialized roles or certain regions. This is where I can swiftly add value. I specialize in tackling challenging roles and focusing on regions that need a dedicated, expert touch. Additionally, Rekall Consulting offers services beyond candidate sourcing – we provide competitor and market analysis, valuable insights that can be integral during the hiring process.</p>
+<h3 id="ceo-objection-i-appreciate-that-but-we-often-work-closely-with-hr-for-these-matters">CEO objection: I appreciate that, but we often work closely with HR for these matters.</h3>
+<p><strong>Tech Recruiter:</strong> Understandable. While I'm happy to collaborate with HR, it's important for me to connect with you directly to gain a clear understanding of the type of candidate you need. As a proactive search organization, I thrive on positioning your value proposition in the market to attract top-tier talent. This requires insights that HR might not possess – insights that can only come from engaging with individuals who understand your organization intimately. Without the involvement of hiring managers, our chances of sourcing exceptional talent decrease significantly.</p>
+<h3 id="ceo-objection-well-hr-does-have-the-information-and-the-job-brief">CEO objection: Well, HR does have the information and the job brief.</h3>
+<p><strong>Tech Recruiter:</strong> I appreciate that HR might have a job brief, but our approach is more direct. We're a search consultancy, which means we reach out to candidates directly within the market. The level of detail and understanding required to effectively present your opportunity to potential candidates goes beyond what's typically covered in a job brief. We're dedicated to ensuring that we effectively communicate your opportunity to the right candidates.</p>
+<h3 id="ceo-objection-alright-ill-keep-that-in-mind-but-we-often-keep-an-eye-out-for-new-talent-even-if-were-not-hiring-immediately">CEO objection: Alright, I'll keep that in mind. But we often keep an eye out for new talent even if we're not hiring immediately.</h3>
+<p><strong>Tech Recruiter:</strong> I completely understand. It's wise to remain open to new opportunities. Just to give you a bit more insight into our approach – what types of roles have you found most challenging to fill recently, and how have your internal teams handled them?</p>
+<h3 id="ceo-objection-we-do-have-preferred-suppliers-we-work-with-for-our-recruitment-needs">CEO objection: We do have preferred suppliers we work with for our recruitment needs.</h3>
+<p><strong>Tech Recruiter:</strong> That's understandable. Many companies have preferred suppliers lists. However, Rekall Consulting has often come into play when the existing suppliers haven't delivered exceptional talent. We've engaged with the same talent as traditional suppliers but with a unique approach that resonated with them. I'd love the opportunity to showcase how we can bring immediate value. Once you've seen the results, we can discuss the possibility of Rekall Consulting becoming part of your preferred suppliers list. What specific qualities are you looking for in your suppliers?</p>
+<h3 id="ceo-objection-and-what-about-fees-we-usually-pay-around-15">CEO objection: And what about fees? We usually pay around 15%.</h3>
+<p><strong>Tech Recruiter:</strong> Rekall Consulting operates as a Search Consultancy, which involves a more thorough process. We actively seek out the best talent in the market, involving a comprehensive process of mapping the market, targeting potential candidates, and engaging with individuals within organizations to ensure the highest quality. Additionally, our services can include competitor and market analysis, providing valuable insights during the search cycle. This approach ensures that the caliber of candidates we provide is exceptionally high. I'm confident that once you see the value and benefits our candidates can bring to your business, you'll see the worth in our fee structure.</p>
+<h3 id="ceo-objection-well-i-dont-know-if-were-ready-to-hire-just-yet">CEO objection: Well, I don't know if we're ready to hire just yet.</h3>
+<p><strong>Tech Recruiter:</strong> I completely understand your position. However, may I ask how this position has come about? Understanding the context can help us identify how we might be of value in the future. Also, could you share how many open positions you currently have headcount sign-off for?</p>
+<h3 id="ceo-objection-were-looking-to-expand-into-new-territories">CEO objection: We're looking to expand into new territories.</h3>
+<p><strong>Tech Recruiter:</strong> That's exciting! Expanding into new territories often comes with unique challenges, including finding the right talent to support growth. Our specialized approach can be particularly valuable in these situations. Would it be possible to discuss your expansion plans in more detail to understand your timing and hiring needs?</p>
+<p><strong>CEO:</strong> We're considering expanding our sales team into a few new states over the next 6 months.</p>
+<p><strong>Tech Recruiter:</strong> Expanding sales coverage is a great move to capitalize on your recent funding. What have been your biggest obstacles in ramping up in new regions previously?</p>
+<p><strong>CEO:</strong> Finding salespeople with the right mix of experience, both with the technology and business landscape in target areas. We've struggled getting reps up to speed.</p>
+<p><strong>Tech Recruiter:</strong> Streamlining that ramp period is so important when entering new markets. Leveraging our expertise in various sectors and regions, I'm confident we could find sales representatives uniquely qualified to hit the ground running. May I share some candidates from our network who could be a strong fit based on the expansion plans you've shared?</p>
+<p><strong>CEO:</strong> Sure, I'm open to taking a look. But I'd like to understand more about your process first. For example, how long does it usually take you to fill a role from start to finish?</p>
+<p><strong>Tech Recruiter:</strong> Great question. For sales roles like these, our average time to fill is 4-6 weeks. We spend the first 2 weeks actively sourcing candidates through our extensive network and targeted outreach. Shortlisted candidates are interviewed within the next 2 weeks, references are checked, and offers are made. The remaining time is for negotiation and onboarding. Our success rate with placed candidates staying over a year is over 85%.</p>
+<p><strong>CEO:</strong> That timeline seems reasonable. What about your fees? As I mentioned earlier, we typically pay around 15%.</p>
+<p><strong>Tech Recruiter:</strong> For searches involving multiple territories or specialized experience requirements like your expansion plans entail, our fee is 20%. However, to demonstrate our expertise and value, I'm willing to offer an initial discounted rate of 17.5% for the first two hires. Does that fee structure work for your needs and timelines?</p>
+<p><strong>CEO:</strong> You've addressed my questions well so far. Alright, why don't you send over a few candidate profiles for us to review? Then we can look at scheduling a follow up call.</p>
+<p><strong>Tech Recruiter:</strong> Wonderful, thank you for your time today. I'll get those over to you by end of day. I'm confident you'll be impressed by the quality and cultural fit. Looking forward to our next discussion.</p>
+<h2 id="further-dialogue">Further Dialogue</h2>
+<p><strong>Tech Recruiter:</strong> HI my name is Will and I am a specialist recruiter in your market</p>
+<p><strong>CEO</strong>:  Hi Will, thanks for reaching out. What can I do for you today?</p>
+<p><strong>User</strong>:<br>
+I want to talk about recruitment</p>
+<p><strong>Assistant</strong>:<br>
+Sure, I'm open to discussing recruitment. Can you provide me with more information about your expertise and how you can help my company?</p>
+<p><strong>User</strong>:<br>
+Yeah, sure</p>
+<p><strong>Assistant</strong>:<br>
+Great, I'm listening. Please go ahead and tell me more about your expertise and how you can assist with recruitment for my company.</p>
+<p><strong>User</strong>:<br>
+Let's arrange a call to go into more detail at a time that suits you</p>
+<p><strong>Assistant</strong>:<br>
+Before we schedule a call, I'd like to understand more about your experience and how you can add value to my company. Can you share some examples of successful placements you've made in the past?</p>
+<p><strong>User</strong>:<br>
+I can do that on a call, let's do that</p>
+<p><strong>Assistant</strong>:<br>
+I appreciate your eagerness to discuss further, but I would like to have a better understanding of your expertise and track record before committing to a call. Can you please provide some information about your success rate in terms of time to hire and the failure rate of candidates you have placed in the past year?</p>
+<h4 id="summary">Summary</h4>
+<p>Here is a new detailed summary of the continued dialogue:</p>
+<p>In this section, the Tech Recruiter continues to engage the CEO and build understanding of their expansion plans and hiring needs. The CEO shares they are considering expanding sales into a few new states over the next 6 months.</p>
+<p>The Tech Recruiter demonstrates active listening by asking what obstacles were faced ramping up in new regions previously. This prompts the CEO to reveal the challenge of finding reps with both technical and regional experience to accelerate their timeline to productivity.</p>
+<p>By acknowledging the importance of streamlining the ramp period when entering new markets, the Tech Recruiter positions their expertise in tailoring candidates to hit the ground running. They offer to provide sample candidate profiles from their network who could be a strong fit based on the expansion details shared.</p>
+<p>The CEO then asks about time to fill, showing interest in understanding the recruitment process. The Tech Recruiter credibly outlines the four to six week average timeline for sales roles, detailing each stage of sourcing, interviewing, referencing and offering. They also evidence success by providing the retention rate of over 85% for placed candidates staying over one year.</p>
+<p>When asked about fees, the Tech Recruiter justifies charging a higher 20% rate for searches involving multiple territories or specialized needs like the CEO's plans. However, they offer an initial discounted 17.5% rate for the first two hires as a demonstration of value.</p>
+<p>Seemingly satisfied with the responses addressing timeframe and pricing questions, the CEO agrees to review candidate profiles and schedules a follow up call. This dialogue represents a successful progression of the conversation as the Tech Recruiter gains further insights, addresses objections, and moves the discussion forward productively.</p>
+
+</body>
+</html>

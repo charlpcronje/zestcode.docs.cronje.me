@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>llmAssessment.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="llms-assessment-for-transcribed-conversation">LLM's Assessment for transcribed conversation</h1>
+<p>Based on the assessment criteria provided, here is my evaluation of how well this conversation would serve as training material:</p>
+<h3 id="clarity-of-introduction-710">Clarity of Introduction: 7/10</h3>
+<p>The recruiter introduced themselves but did not clearly state their purpose or value upfront.</p>
+<h3 id="addressing-concernsobjections-810">Addressing Concerns/Objections: 8/10</h3>
+<p>The recruiter addressed most objections thoroughly with compelling responses.</p>
+<h3 id="persuasiveness-610">Persuasiveness: 6/10</h3>
+<p>While responses addressed topics, the arguments could have been more convincing.</p>
+<h3 id="adaptability-710">Adaptability: 7/10</h3>
+<p>The recruiter adapted ok but did not necessarily tailor approach based on CEO feedback.</p>
+<h3 id="question-quality-610">Question Quality: 6/10</h3>
+<p>Questions gathered info but could have been more insightful or probing.</p>
+<h3 id="active-listening-710">Active Listening: 7/10</h3>
+<p>The recruiter acknowledged points but did not consistently paraphrase or follow up.</p>
+<h3 id="time-management-810">Time Management: 8/10</h3>
+<p>Conversion was efficient while covering necessary topics.</p>
+<h3 id="closing-skills-710">Closing Skills: 7/10</h3>
+<p>Recruiter summarized well but could have been more definitive re: next steps.
+Overall, while the recruiter addressed most objections, the CEO seemed overly cooperative and did not challenge the recruiter sufficiently. This limited the opportunity for the recruiter to practice handling objections skills fully. Some responses also lacked conviction. Therefore, more role playing with a less cooperative CEO would make this a more valuable training experience for recruiters.</p>
+<h2 id="how-the-training-data-could-have-been-more-useful-as-per-claude-100000">How the training data could have been more useful as per Claude 100000</h2>
+<p><strong>CEO:</strong>  I don't really have time for this call right now. Make it quick and tell me what value you can provide.</p>
+<p><strong>Recruiter:</strong>  I appreciate you taking the time to speak with me. As a search consultancy, we've helped many high-growth startups like yours overcome their recruitment challenges. However, I understand your busy schedule. Rather than diving right into my pitch, perhaps we could have a brief, open discussion about your current needs andPain points so I ensure I understand how Rekall might be able to help before taking any more of your valuable time.</p>
+<p><strong>CEO:</strong>  We have an internal team that handles our hiring.</p>
+<p><strong>Recruiter:</strong>  Internal teams do excellent work, but occasionally face constraints external partners can address. What types of roles has your team struggled with recently? Understanding those challenges would help me determine where Rekall's specialized expertise could complement your process. Rather than replacing your team, we aim to collaborate by filling any gaps.</p>
+<p><strong>CEO:</strong>  Maybe, but what exactly makes you different than other recruiters pitching me?</p>
+<p><strong>Recruiter:</strong>  That's a fair question. Most recruiters focus solely on placements, but we consider the full hiring lifecycle. Our market mapping and tailored sourcing approach better ensures cultural fit and longer tenure. We also provide compensation benchmarking and retention strategies to help maximally leverage each hire. While our fees are higher at 20%, the value we provide through reduced time-to-fill and retention has earned us an 88% customer satisfaction rate. Does this help explain our differentiated approach?</p>
+<p><strong>CEO:</strong>  I'll think about it. We're not actively hiring right now anyway.</p>
+<p><strong>Recruiter:</strong>  I understand. Perhaps we could have an exploratory discussion now to understand future plans/needs, build rapport, and learn how best to support when the time comes without any commitment. Having mapped your industry, I may also be able to provide thoughts on strengthening pipelines for when opportunities do arise. What timeline are you envisioning for potential expansions or additions to team?</p>
+<p><strong>CEO:</strong>  Fine, we're considering entering a new territory in 6 months. But I make no promises.</p>
+<p><strong>Recruiter:</strong>  Absolutely, I appreciate you sharing and have no expectation of commitment today. Expansion does pose unique recruitment challenges. Previous clients in similar situations found value in our local market expertise to streamline ramp-up. Perhaps we could explore the specific roles/ competencies needed and how optimizing sourcing in advance could help hit the ground running. Only if of value to you of course - otherwise, thank you again for your time.</p>
+<p><strong>CEO:</strong>  Alright, I'll listen to your ideas since you've been persistent. But don't waste my time.</p>
+<p><strong>Recruiter:</strong>  Thank you, I'll keep it concise. Based on your growth trajectory and expansion timeframe, the roles of highest priority appear to be sales leadership and support staff. Am I understanding your needs accurately so far? After you confirm, I'll share some candidate profiles demonstrating how our tailored sourcing approach could deliver a shortlist of ideal matches in just 4 weeks to allow ample ramp-up time. How does this proposed discussion align with your objectives for optimal hiring success?</p>
+<p><strong>CEO:</strong>  Okay, send over a couple options then. But I make no commitments.</p>
+<p><strong>Recruiter:</strong>  Understood completely. I'll send over 2 well-suited candidates by COB along with a validation of our process. Please take time to review at your convenience. In the interest of respecting your schedule, I'll follow up in a week to discuss your feedback and next steps, if any. Thank you again for your consideration - it's greatly appreciated.</p>
+<h2 id="a-week-later-the-recruiter-follows-up-with-the-ceo">A week later, the Recruiter follows up with the CEO:</h2>
+<p><strong>Recruiter:</strong>  Hi, thanks for taking my call. I wanted to check in on the candidate profiles I sent last week. What are your initial thoughts?</p>
+<p><strong>CEO:</strong>  The first candidate seemed okay, but I wasn't sold on the second.</p>
+<p><strong>Recruiter:</strong>  No problem, thanks for the feedback. May I ask what concerns you had about the second candidate so I can better understand your requirements? Continuous improvement is so important to me.</p>
+<p><strong>CEO:</strong>  They just didn't have the right experience for the role. I'm looking for someone who has worked extensively in our industry.</p>
+<p><strong>Recruiter:</strong>  Ah, industry experience is key - I'll be sure to filter for that more specifically going forward. Rather than taking up more of your time, would 45 minutes on Friday work to discuss one or two replacement options that better fit your criteria? I aim to provide the best possible candidates so appreciate your guidance.</p>
+<p><strong>CEO:</strong>  Fine, but I expect stronger options this time if you want my business.</p>
+<p><strong>Recruiter:</strong>  Absolutely, thank you for the critique - it will only help me deliver superior results. For our Friday call, I'll present two candidates with extensive and directly relevant experience. I'll also bring detailed validation of why they're exceptional cultural and technical fits based on our thorough vetting process. Please hold me accountable to providing the top talent you need. My goal is for you to feel confident in Rekall's value after this discussion.</p>
+<p><strong>CEO:</strong>  Alright, I'll hear you out on Friday then. Don't waste my time.</p>
+<p><strong>Recruiter:</strong>  You have my word, I'll respect your time. Thank you for the opportunity - I look forward to impressing you with our revamped candidates. Have a great rest of your week!</p>
+<p><strong>CEO:</strong>  We'll see about that. Talk on Friday. hangs up</p>
+<p>This continuation showed the recruiter following up constructively after initial rejection, asking insightful questions, committing to improve, and setting clear expectations for the next discussion to build confidence. The CEO remained skeptic but open to further engagement if the recruiter delivers.</p>
+
+</body>
+</html>

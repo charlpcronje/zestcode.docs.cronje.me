@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>assessmentCriteria.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="assessment-criteria">Assessment Criteria</h1>
+<p>This way of training sales staff can be invaluable in many industries, so let's explore how to create personas for a Large Language models and how to assess them.</p>
+<h2 id="criteria-for-assessing-conversations-for-training-purposes">Criteria for Assessing Conversations for Training Purposes</h2>
+<h3 id="assessment-criteria-for-transcribed-conversation">Assessment criteria for transcribed conversation</h3>
+<p><em>This assessment does not take into account the actual conversation but only what was said, so the tone and verbal ques are not taken into consideration here</em></p>
+<h4 id="1-clarity-of-introduction-why-first-impressions">1. Clarity of Introduction (Why: First Impressions)</h4>
+<ul>
+<li><strong>Why</strong>: The introduction sets the tone for the entire conversation. A clear and concise introduction can capture attention and establish credibility.</li>
+<li><strong>How to Assess</strong>: Evaluate if the introduction clearly states who the caller is, the purpose of the call, and what value they can offer. Use a scale from 1-10 to rate the clarity.</li>
+</ul>
+<h4 id="2-addressing-concerns-and-objections-why-problem-solving">2. Addressing Concerns and Objections (Why: Problem-Solving)</h4>
+<ul>
+<li><strong>Why</strong>: Handling objections effectively is crucial for moving the conversation forward and for problem-solving.</li>
+<li><strong>How to Assess</strong>: Measure how well the caller addresses concerns and objections raised by the other party. Use specific examples from the conversation to rate this on a 1-10 scale.</li>
+</ul>
+<h4 id="3-persuasiveness-why-convincing-power">3. Persuasiveness (Why: Convincing Power)</h4>
+<ul>
+<li><strong>Why</strong>: The ability to persuade is key to achieving the conversation's objective, whether it's making a sale, setting an appointment, etc.</li>
+<li><strong>How to Assess</strong>: Evaluate the quality and effectiveness of the arguments presented. Rate persuasiveness on a scale of 1-10 based on how compelling the arguments are.</li>
+</ul>
+<h4 id="4-adaptability-why-flexibility">4. Adaptability (Why: Flexibility)</h4>
+<ul>
+<li><strong>Why</strong>: Conversations are dynamic. The ability to adapt to new information or objections is crucial.</li>
+<li><strong>How to Assess</strong>: Assess how well the caller adapts their approach based on the flow of the conversation. Rate on a scale of 1-10.</li>
+</ul>
+<h4 id="5-question-quality-why-information-gathering">5. Question Quality (Why: Information Gathering)</h4>
+<ul>
+<li><strong>Why</strong>: Good questions can provide valuable insights into the other party's needs and concerns.</li>
+<li><strong>How to Assess</strong>: Evaluate the relevance and depth of the questions asked. Use a 1-10 scale to rate the quality of questions.</li>
+</ul>
+<h4 id="6-active-listening-why-understanding-and-rapport">6. Active Listening (Why: Understanding and Rapport)</h4>
+<ul>
+<li><strong>Why</strong>: Active listening shows that the caller understands and respects the other party's viewpoint, which helps in building rapport.</li>
+<li><strong>How to Assess</strong>: Look for signs of active listening such as paraphrasing, asking follow-up questions, or acknowledging the other party's points. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="7-time-management-why-efficiency">7. Time Management (Why: Efficiency)</h4>
+<ul>
+<li><strong>Why</strong>: Effective time management respects the other party's time and keeps the conversation focused.</li>
+<li><strong>How to Assess</strong>: Evaluate if the conversation was concise and if it reached its objectives within a reasonable time frame. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="8-closing-skills-why-conclusion-and-next-steps">8. Closing Skills (Why: Conclusion and Next Steps)</h4>
+<ul>
+<li><strong>Why</strong>: A strong close can summarize the conversation and set the stage for future interactions.</li>
+<li><strong>How to Assess</strong>: Assess how well the conversation was concluded and if next steps or commitments were clearly established. Rate on a 1-10 scale.</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>These eight criteria cover essential aspects of a conversation, from the introduction to the conclusion. They are designed to provide a comprehensive assessment that can be scaled to evaluate hundreds of conversations.</p>
+<h3 id="assessment-criteria-for-actual-conversation-content">Assessment criteria for actual conversation content</h3>
+<p><em>This assessment is more focused on how the conversation was handled and less about the exact content</em></p>
+<h4 id="1-tone-and-vocal-quality-why-emotional-impact">1. Tone and Vocal Quality (Why: Emotional Impact)</h4>
+<ul>
+<li><strong>Why</strong>: The tone of voice can convey emotions and attitudes that text cannot, affecting the listener's perception and engagement.</li>
+<li><strong>How to Assess</strong>: Evaluate the tone for warmth, confidence, and sincerity. Use a 1-10 scale to rate the vocal quality and emotional impact.</li>
+</ul>
+<h4 id="2-pacing-why-comprehension-and-comfort">2. Pacing (Why: Comprehension and Comfort)</h4>
+<ul>
+<li><strong>Why</strong>: Speaking too fast or too slow can affect the listener's ability to comprehend and feel comfortable during the conversation.</li>
+<li><strong>How to Assess</strong>: Listen for a pace that matches the complexity of the information being shared. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="3-use-of-silence-why-thoughtfulness-and-respect">3. Use of Silence (Why: Thoughtfulness and Respect)</h4>
+<ul>
+<li><strong>Why</strong>: Effective use of silence can indicate thoughtfulness, give the other party time to think, and can be a powerful tool in persuasion.</li>
+<li><strong>How to Assess</strong>: Evaluate how well silence is used to emphasize points or allow for reflection. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="4-audibility-and-clarity-why-basic-communication">4. Audibility and Clarity (Why: Basic Communication)</h4>
+<ul>
+<li><strong>Why</strong>: If the speaker is not audible or clear, the message will be lost, regardless of its quality.</li>
+<li><strong>How to Assess</strong>: Assess the volume and enunciation of the speaker. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="5-interruption-handling-why-respect-and-flow">5. Interruption Handling (Why: Respect and Flow)</h4>
+<ul>
+<li><strong>Why</strong>: How interruptions are handled can affect the flow of the conversation and indicate the level of respect between parties.</li>
+<li><strong>How to Assess</strong>: Note instances of interruptions and how they are managed by both parties. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="6-verbal-affirmations-why-engagement">6. Verbal Affirmations (Why: Engagement)</h4>
+<ul>
+<li><strong>Why</strong>: Simple affirmations like &quot;I see,&quot; &quot;understood,&quot; or &quot;go on&quot; can indicate active listening and engagement.</li>
+<li><strong>How to Assess</strong>: Count the instances of verbal affirmations and assess their appropriateness. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="7-non-verbal-sounds-why-subtext">7. Non-Verbal Sounds (Why: Subtext)</h4>
+<ul>
+<li><strong>Why</strong>: Sounds like sighs, laughter, or pauses can provide context and subtext that text cannot convey.</li>
+<li><strong>How to Assess</strong>: Evaluate the impact of non-verbal sounds on the conversation's tone and meaning. Rate on a 1-10 scale.</li>
+</ul>
+<h4 id="8-call-technical-quality-why-seamless-interaction">8. Call Technical Quality (Why: Seamless Interaction)</h4>
+<ul>
+<li><strong>Why</strong>: Poor call quality can disrupt the flow of conversation and cause misunderstandings.</li>
+<li><strong>How to Assess</strong>: Note any instances of call drops, static, or other technical issues and how they impacted the conversation. Rate on a 1-10 scale.</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+## Authentication
+
+- Login with my email address, I wa and a password I choose
+- I also have a Public/Private key setup
+
+```pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxn8bOI1Gtamib916ODgAH5jXc2lg5CLRZD5E2ja9NeD6FfZ86ZJ+wBSvrFzVmgjclkPtuaFqyXfJLoJwgN7FEbY6cAKUwRJvjWFaSBYmz25+2s+R3noWMC6NXGedHCWZo8/AU5I52WV2F5APVHyMsBdBf0KrU8oszYAkINLeuvub6EE7awsnuYujs2laFvp0In/N14IkvnlxztGTZkPYBannm//LLPhTu8n2J6YOVgWXgqSD51jC3Jrrnb+mGi44QG0ACC3wrCRhMafoR4FphaAYTRC5Rk8SOAZDKu0ILheDwXzZVO3lP9IVJaECJp6BIYJRIK2RlIxPbEJyzRon24VXekQoVkvkG0di4KqJgBJCMxiIxjmy1oPc/PqMs8xFy3+nPhTqF2LueGDNDgq3BCZrEoNnLwAUEAR7eZZDCb7yydRVNmBSDyuZHBuCn98UmRhl828Ts53EwJkFSomMel0ZL+mwoaqg03aDGIf1/reG6WH3Bxh7MR/fQ4enyEFE= charl@zestcode.digital
+```
+> Above is for `id_rsa`

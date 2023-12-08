@@ -1,0 +1,71 @@
+InfoType,TableName,Info
+EXPLANATION,"InfoType: Indicates the type of information (TABLE, INDEX, FOREIGN_KEY).","TableName: The name of the table. Info: The columns, index columns, or foreign key columns, depending on the InfoType."
+TABLE,addresses,"id,addressable_type,addressable_id,address_line_1,address_line_2,city,county,postcode,lat,lng,created_at,updated_at"
+TABLE,failed_jobs,"id,uuid,connection,queue,payload,exception,failed_at"
+TABLE,jobs,"id,queue,payload,attempts,reserved_at,available_at,created_at"
+TABLE,migrations,"id,migration,batch"
+TABLE,model_has_permissions,"permission_id,model_type,model_id"
+TABLE,model_has_roles,"role_id,model_type,model_id"
+TABLE,model_reviews,"id,model_id,model_type,user_id,review,ratings,reply,active,created_at,updated_at,approved"
+TABLE,password_resets,"email,token,created_at"
+TABLE,permissions,"id,name,guard_name,created_at,updated_at"
+TABLE,personal_access_tokens,"id,tokenable_type,tokenable_id,name,token,abilities,last_used_at,expires_at,created_at,updated_at"
+TABLE,practices,"id,address_id,user_id,name,phone_number,email,description,agency,credits,created_at,updated_at,logo"
+TABLE,role_has_permissions,"permission_id,role_id"
+TABLE,roles,"id,name,guard_name,created_at,updated_at"
+TABLE,scheduled_notifications,"id,target_id,target_type,target,notification_type,notification,send_at,sent_at,rescheduled_at,cancelled_at,created_at,updated_at,meta"
+TABLE,slots,"id,start_date,end_date,day_of_week,created_at,updated_at"
+TABLE,subscription_items,"id,subscription_id,stripe_id,stripe_product,stripe_price,quantity,created_at,updated_at"
+TABLE,subscriptions,"id,user_id,name,stripe_id,stripe_status,stripe_price,quantity,trial_ends_at,ends_at,created_at,updated_at"
+TABLE,user_profiles,"id,user_id,approved,phone,identity_document,profile_image,rcs_number,created_at,updated_at,role,description"
+TABLE,user_vacancy,"user_id,vacancy_id,status,created_at,updated_at"
+TABLE,users,"id,address_id,name,email,email_verified_at,password,remember_token,created_at,updated_at,stripe_id,pm_type,pm_last_four,trial_ends_at"
+TABLE,vacancies,"id,title,description,location,lat,lng,day_hourly_salary,night_hourly_salary,night_rate_multiplier,day_rate_multiplier,currency,position_type,position_level,start_date,end_date,charge_type,filled,practice_id,created_at,updated_at,clicks"
+INDEX,addresses,"addresses_addressable_id_addressable_type_index(addressable_id,addressable_type)"
+INDEX,addresses,addresses_lat_index(lat)
+INDEX,addresses,addresses_lng_index(lng)
+INDEX,addresses,PRIMARY(id)
+INDEX,failed_jobs,failed_jobs_uuid_unique(uuid)
+INDEX,failed_jobs,PRIMARY(id)
+INDEX,jobs,jobs_queue_index(queue)
+INDEX,jobs,PRIMARY(id)
+INDEX,migrations,PRIMARY(id)
+INDEX,model_has_permissions,"model_has_permissions_model_id_model_type_index(model_id,model_type)"
+INDEX,model_has_permissions,"PRIMARY(permission_id,model_id,model_type)"
+INDEX,model_has_roles,"model_has_roles_model_id_model_type_index(model_id,model_type)"
+INDEX,model_has_roles,"PRIMARY(role_id,model_id,model_type)"
+INDEX,model_reviews,PRIMARY(id)
+INDEX,password_resets,PRIMARY(email)
+INDEX,permissions,"permissions_name_guard_name_unique(name,guard_name)"
+INDEX,permissions,PRIMARY(id)
+INDEX,personal_access_tokens,personal_access_tokens_token_unique(token)
+INDEX,personal_access_tokens,"personal_access_tokens_tokenable_type_tokenable_id_index(tokenable_type,tokenable_id)"
+INDEX,personal_access_tokens,PRIMARY(id)
+INDEX,practices,PRIMARY(id)
+INDEX,role_has_permissions,"PRIMARY(permission_id,role_id)"
+INDEX,role_has_permissions,role_has_permissions_role_id_foreign(role_id)
+INDEX,roles,PRIMARY(id)
+INDEX,roles,"roles_name_guard_name_unique(name,guard_name)"
+INDEX,scheduled_notifications,PRIMARY(id)
+INDEX,slots,PRIMARY(id)
+INDEX,subscription_items,PRIMARY(id)
+INDEX,subscription_items,subscription_items_stripe_id_unique(stripe_id)
+INDEX,subscription_items,"subscription_items_subscription_id_stripe_price_unique(subscription_id,stripe_price)"
+INDEX,subscriptions,PRIMARY(id)
+INDEX,subscriptions,subscriptions_stripe_id_unique(stripe_id)
+INDEX,subscriptions,"subscriptions_user_id_stripe_status_index(user_id,stripe_status)"
+INDEX,user_profiles,PRIMARY(id)
+INDEX,user_profiles,user_profiles_user_id_foreign(user_id)
+INDEX,user_vacancy,user_vacancy_user_id_foreign(user_id)
+INDEX,user_vacancy,user_vacancy_vacancy_id_foreign(vacancy_id)
+INDEX,users,PRIMARY(id)
+INDEX,users,users_email_unique(email)
+INDEX,users,users_stripe_id_index(stripe_id)
+INDEX,vacancies,PRIMARY(id)
+FOREIGN_KEY,model_has_permissions,model_has_permissions - model_has_permissions_permission_id_foreign RELATED TO permissions:id
+FOREIGN_KEY,model_has_roles,model_has_roles - model_has_roles_role_id_foreign RELATED TO roles:id
+FOREIGN_KEY,role_has_permissions,role_has_permissions - role_has_permissions_permission_id_foreign RELATED TO permissions:id
+FOREIGN_KEY,role_has_permissions,role_has_permissions - role_has_permissions_role_id_foreign RELATED TO roles:id
+FOREIGN_KEY,user_profiles,user_profiles - user_profiles_user_id_foreign RELATED TO users:id
+FOREIGN_KEY,user_vacancy,user_vacancy - user_vacancy_user_id_foreign RELATED TO users:id
+FOREIGN_KEY,user_vacancy,user_vacancy - user_vacancy_vacancy_id_foreign RELATED TO vacancies:id
