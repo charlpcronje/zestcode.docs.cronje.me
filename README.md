@@ -69,6 +69,7 @@ output:
 - **JavaScript**
    - [JS Meta Programming](./snippets/js/metaProgramming.md)
    - [JS Patters](./snippets/js/patterns.md)
+   - [Bulk Image Download](./snippets/js/bulkImageDownload.md)
 - **UI and CSS**
    - [TailWind UI](https://tailwindui.com)
 
